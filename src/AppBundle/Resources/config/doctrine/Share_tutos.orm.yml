@@ -1,0 +1,51 @@
+AppBundle\Entity\Share_tutos:
+    type: entity
+    table: t_share_tutos_stu
+    oneToMany:
+      TutoFiles:
+            targetEntity: Share_tutos_files
+            mappedBy: FilesTuto
+      TutoView:
+            targetEntity: Share_tutos_view
+            mappedBy: ViewTuto
+      TutoLike:
+            targetEntity: Share_tutos_like
+            mappedBy: LikeTuto
+    manyToOne:
+      TutosUsers:
+        targetEntity: Share_users
+        inversedBy: UsersTutos
+        joinColumn:
+            name: user_id_stu
+            referencedColumnName: id
+      TutosCategories:
+        targetEntity: Share_categories
+        inversedBy: CategoriesTutos
+        joinColumn:
+            name: categories_id_stu
+            referencedColumnName: id
+    repositoryClass: AppBundle\Repository\Share_tutosRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks:
+        prePersist: [ insertCreatedAtAuto, insertUpdateAtAuto ]
+        preUpdate: [ updateDateAuto ]
+    fields:
+        title_stu:
+            type: string
+        description_stu:
+            type: string
+        content_stu:
+            type: text
+        active_stu:
+            type: boolean
+            option:
+              defaults: 1
+        created_at_stu:
+            type: datetime
+        updated_at_stu:
+            type: datetime

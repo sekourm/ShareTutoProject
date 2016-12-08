@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+
+        <!-- Boostrap css -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap/bootstrap.min.css') }}">
+
+        <!-- Css to the project -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/form_anonymous.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/tutorial.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/file_tutorial.css') }}">
+
+        <!-- Css to the plugin wisiwig -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/plugin/wysiwyg.css') }}">
+
+        <!-- Css to the plugin upload -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/plugin/jquery.filer.css') }}">
+
+        <!-- favicon to the project -->
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <!-- jquery -->
+        <script src="{{ asset('js/jquery.js') }}"></script>
+
+        <!-- search js -->
+        <script src="{{ asset('js/search.js') }}"></script>
+
+        <!-- Boostrap Js -->
+        <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+
+        <!-- js card of tutorial -->
+        <script src="{{ asset('js/cards/cards.js') }}"></script>
+
+        <!-- Plugin upload Js -->
+        <script src="{{ asset('js/plugin/jquery.filer.min.js') }}"></script>
+        <script src="{{ asset('js/plugin/custom.js') }}"></script>
+
+    </head>
+    <body>
+        {% block nav %}{% include '::Nav/nav.html.twig' %}{% endblock %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

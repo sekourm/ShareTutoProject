@@ -1,0 +1,27 @@
+AppBundle\Entity\Share_tutos_view:
+    type: entity
+    table: t_share_tutos_view_stv
+    manyToOne:
+      ViewTuto:
+        targetEntity: Share_tutos
+        inversedBy: TutoView
+        joinColumn:
+          name: tuto_id_stv
+          referencedColumnName: id
+      ViewUsers:
+        targetEntity: Share_users
+        inversedBy: UsersView
+        joinColumn:
+          name: users_id_stv
+          referencedColumnName: id
+    repositoryClass: AppBundle\Repository\Share_tutos_viewRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }
+    fields:
+        date_stv:
+            type: datetime

@@ -1,0 +1,28 @@
+AppBundle\Entity\Share_users:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email_sha
+            message: "Email déjà prit"
+            groups:  ['Edit', 'New']
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username_sha
+            message: "Pseudonyme déjà prit"
+            groups:  ['Edit', 'New']
+    properties:
+        username_sha:
+            - NotNull:
+                message: Entrer un pseudonyme
+                groups:  ['Edit', 'New']
+            - Length:
+                            min: 4
+                            max: 50
+                            minMessage: "L'username doit contenir {{ limit }} charactéres minimum"
+                            maxMessage: "L'username doit contenir {{ limit }} charactéres maximum"
+                            groups:  ['Edit', 'New']
+        email_sha:
+            - Email:
+                message: Entrer une adresse email valide.
+                groups:  ['Edit', 'New']
+            - NotNull:
+                message: Entrer une adresse email.
+                groups:  ['Edit', 'New']

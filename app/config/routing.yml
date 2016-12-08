@@ -1,0 +1,59 @@
+app_home_site:
+  path: /home
+  defaults:  { _controller: AppBundle:Home:Index }
+
+login:
+  path: /login
+  defaults:  { _controller: AppBundle:Security:Login }
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
+
+app_register_site:
+  path: /register
+  defaults:  { _controller: AppBundle:Register:Index }
+
+app_confirmation_email:
+  path: /confirmation/account/{user_id}/{personal_key}
+  defaults:  { _controller: AppBundle:Register:ConfirmationAccount }
+
+app_disconnect_site:
+  path: /login/disconnect
+  defaults: { _controller: AppBundle:Login:Disconnect }
+
+app_create_tutorial_site:
+  path: /tuto/create
+  defaults: { _controller: AppBundle:Tutorial:CreateTutorial }
+
+app_view_tutorial_by_categ_site:
+  path: /tuto/view/categ/{categ_id}
+  defaults: { _controller: AppBundle:Tutorial:ViewTutorialByCategorie }
+
+app_view_tuto_site:
+  path: /tuto/view/{tuto_id}
+  defaults: { _controller: AppBundle:Tutorial:ViewTutorial }
+
+app_create_like_site:
+  path: /like/create/{tuto_id}
+  defaults: { _controller: AppBundle:Like:CreateLike }
+
+app_delete_like_site:
+  path: /like/delete/{tuto_id}
+  defaults: { _controller: AppBundle:Like:DeleteLike }
+
+app_show_like_site:
+  path: /like/view/
+  defaults: { _controller: AppBundle:Like:ShowLike }
+
+app_search_tutorial_site:
+  path: /search/tutorial/{title_tutorial}
+  defaults: { _controller: AppBundle:Search:SearchTutorial }
+
+pageNotFound:
+    pattern:  /{path}
+    defaults: { _controller: AppBundle:PageNotFound:pageNotFound, path: '' }
+    requirements:
+        path: .*

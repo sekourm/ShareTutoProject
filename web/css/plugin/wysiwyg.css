@@ -1,0 +1,43 @@
+.wysiwyg-textarea, .wysiwyg-visuel {
+    min-height: 300px;
+    border: 2px dotted #ccc;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.wysiwyg-bouton_1, .wysiwyg-bouton_2 {
+    float: right;
+}
+
+select {
+    height: 33px;
+    background-color: white;
+}
+
+.img-embed {
+    width:500px;
+}
+
+#text {
+    background-color: #ccc;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+    height: 300px;
+}
+
+.showSwitch {
+    display: block;
+}
+
+.hideSwitch {
+    display: none;
+}
+
+.activeSwitch {
+    background: #ccc;
+}

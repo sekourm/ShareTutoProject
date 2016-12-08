@@ -1,0 +1,56 @@
+<form class="form-horizontal" id="contact_form" {{ form_enctype (form) }} method="POST">
+    <fieldset>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                    {{ form_label(form.title_stu) }}
+                    {{ form_widget(form.title_stu) }}
+                </div>
+            </div>
+        </div>
+        {{ form_errors(form.title_stu) }}
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-inbox"></i></span>
+                    {{ form_label(form.description_stu) }}
+                    {{ form_widget(form.description_stu) }}
+                </div>
+            </div>
+        </div>
+        {{ form_errors(form.description_stu) }}
+        <div class="form-group">
+            <div class="col-md-12">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                {{ form_label(form.TutosCategories) }}
+                {{ form_widget(form.TutosCategories) }}
+            </div>
+        </div>
+        {{ form_errors(form.TutosCategories) }}
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
+                {{ form_label(form.content_stu) }}
+                {{ form_widget(form.content_stu) }}
+            </div>
+        </div>
+        {{ form_errors(form.content_stu) }}
+        {{ form_row(form._token) }}
+
+        <div class="col-md-12">
+            {{ form_label(form.file) }}
+            {{ form_widget(form.file,  { 'id': 'filer_input'}) }}
+        </div>
+
+        {{ form_errors(form.file) }}
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-md btn-danger pull-right">Go</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>

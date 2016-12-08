@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12 sidebar">
+                <ul class="nav nav-sidebar text-center">
+                    {% for all_c in categories %}
+                        <li><a href="{{ path('app_view_tutorial_by_categ_site', { categ_id: all_c.getId}) }}"><img src="{{ all_c.getLogoSca }}"
+                                                                              alt="{{ all_c.getNameSca }}"
+                                                                              class="logo_categories">{{ all_c.getNameSca }}
+                            </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-12 col-xs-12 col-md-6 col-centered">
+                <div class="col-sm-12 col-xs-12 col-md-12">
+                    <h1 class="page-header">
+                        <img src="{{ asset('img/arrow.png') }}" alt="arrow"
+                             class="arrow_header"/>{{ tuto.getTitleStu }}
+                    </h1>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-12 description_tuto">
+                    {{ tuto.getDescriptionStu }}
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-12">
+                    {{ tuto.getContentStu | raw }}
+                </div>
+                {% if file %}
+                    <div class="col-sm-12 col-xs-12 col-md-12">
+                        <br/>
+                        <ul class="listrap">
+                            {% for n_file in file %}
+                                <li>
+                                    <div class="listrap-toggle">
+                                        <span></span><img src="{{ asset('img/file.png') }}" width="60"
+                                                          height="60"/>
+                                    </div>
+                                    <strong>{{ n_file.getRealNameStf }}</strong>
+                                    <a href="{{ (directory ~ n_file.getNameStf) }}"
+                                       download="{{ n_file.getRealNameStf }}" class="button_download pull-right">Download</a>
+                                </li>
+                                <br/>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if like_user %}
+                    <div class="col-sm-12 col-xs-12 col-md-12 like-content">
+                        <a href="{{ path('app_delete_like_site', { tuto_id: tuto.getId}) }}" class="btn-secondary like-review">
+                            <i class="fa glyphicon glyphicon-heart" aria-hidden="true"></i> Dislike
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="col-sm-12 col-xs-12 col-md-12 like-content">
+                        <a href="{{ path('app_create_like_site', { tuto_id: tuto.getId}) }}" class="btn-secondary like-review">
+                            <i class="fa glyphicon glyphicon-heart" aria-hidden="true"></i> Like
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

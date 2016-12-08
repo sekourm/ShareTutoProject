@@ -1,0 +1,32 @@
+<form action="{{ path('login_check') }}" class="form-horizontal" id="contact_form" method="post">
+    <fieldset>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" id="username" placeholder="Email/Username" name="_username" value="{{ last_username }}"
+                           class="form-control" required/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input type="password" id="password" name="_password" placeholder="Password" class="form-control"
+                           required/>
+                </div>
+            </div>
+        </div>
+        {% if error %}
+            <div class="alert alert-warning text-center">
+                {{ error.message|replace({"Bad credentials": "Vos identifiants sont incorrect", "User account is disabled.": "Votre compte n'est pas activé"}) }}
+            </div>
+        {% endif %}
+        <div class="form-group">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-md btn-danger pull-right">Go</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

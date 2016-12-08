@@ -1,0 +1,32 @@
+AppBundle\Entity\Share_tutos_like:
+    type: entity
+    table: t_share_tuto_like
+    manyToOne:
+      LikeTuto:
+        targetEntity: Share_tutos
+        inversedBy: TutoLike
+        joinColumn:
+            name: tuto_id_stl
+            referencedColumnName: id
+      LikeUsers:
+        targetEntity: Share_users
+        inversedBy: UsersLike
+        joinColumn:
+            name: users_id_stl
+            referencedColumnName: id
+    repositoryClass: AppBundle\Repository\Share_tutos_likeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks:
+            prePersist: [ insertDateAuto ]
+    fields:
+        date_stl:
+            type: datetime
+        active_stl:
+            type: boolean
+            option:
+              defaults: 1

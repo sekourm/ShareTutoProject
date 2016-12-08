@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% set count_like = 0 %}
+    {% set count_view = 0 %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 sidebar">
+                <ul class="nav nav-sidebar text-center margin_nav">
+                    {% for all_c in categories %}
+                        <li><a href="{{ path('app_view_tutorial_by_categ_site', { categ_id: all_c.getId}) }}"><img src="{{ all_c.getLogoSca }}"
+                                                                              alt="{{ all_c.getNameSca }}"
+                                                                              class="logo_categories">{{ all_c.getNameSca }}
+                            </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm-12 col-xs-12 col-md-12">
+                <div class="col-sm-12 col-xs-12 col-md-12">
+                    <h1 class="page-header"><img src="{{ asset('img/arrow.png') }}" alt="arrow" class="arrow_header"/>Derniers
+                        tutoriels</h1>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-10 col-centered">
+                    <div class="row placeholders margin_card">
+                        {% for last_n in last_tutorial | slice(0, 4) %}
+                            <div class="cards">
+                                <div class="image">
+                                    <img src="{{ last_n.getTutosCategories.getLogoSca }}"
+                                         alt="{{ last_n.getTutosCategories.getNameSca }}"/>
+                                    <a href="{{ path('app_view_tuto_site', { tuto_id: last_n.getId}) }}" class="tutoriel">Voir le tutoriel</a>
+                                </div>
+                                <div class="button_cards_dispear">
+                                    <h3>{{ last_n.getTitleStu }}</h3>
+                                    <p>{{ last_n.getDescriptionStu }}</p>
+                                    <div class="name"><img src="{{ asset('img/users.png') }}" alt="users"
+                                                           class="users_tuto"/> {{ last_n.getTutosUsers.GetUsernameSha }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-12">
+                    <h2 class="page-header"><img src="{{ asset('img/arrow.png') }}" alt="arrow" class="arrow_header2"/>Les
+                        six plus vue</h2>
+                    <div class="col-sm-12 col-xs-12 col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Classement</th>
+                                    <th>Pseudonyme</th>
+                                    <th>Titre</th>
+                                    <th>Categorie</th>
+                                    <th>Nbr vue</th>
+                                    <th>Voir le tuto</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for t_view in view_tutorial %}
+                                    {% set count_view = count_view + 1 %}
+
+                                    <tr>
+                                        <td>{{ count_view }}</td>
+                                        <td>{{ t_view.getTutosUsers.getUsernameSha }}</td>
+                                        <td>{{ t_view.getTitleStu }}</td>
+                                        <td>{{ t_view.getTutosCategories.getNameSca }}</td>
+                                        {% for key, t_number in view_number %}
+                                            {% if key == t_view.getId %}
+                                                <td>{{ t_number }}</td>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <td><a href="{{ path('app_view_tuto_site', { tuto_id: t_view.getId}) }}" class="tutoriel">Voir le
+                                                tutoriel</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-12">
+                    <h2 class="page-header"><img src="{{ asset('img/arrow.png') }}" alt="arrow" class="arrow_header2"/>Les
+                        six plus aimer</h2>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Classement</th>
+                                <th>Pseudonyme</th>
+                                <th>Titre</th>
+                                <th>Categorie</th>
+                                <th>Nbr vue</th>
+                                <th>Voir le tuto</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for t_like in like_tutorial %}
+                                <tr>
+
+                                    {% set count_like = count_like + 1 %}
+
+                                    <td>{{ count_like }}</td>
+                                    <td>{{ t_like.getTutosUsers.getUsernameSha }}</td>
+                                    <td>{{ t_like.getTitleStu }}</td>
+                                    <td>{{ t_like.getTutosCategories.getNameSca }}</td>
+                                    {% for key, t_number in like_number %}
+                                        {% if key == t_like.getId %}
+                                            <td>{{ t_number }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <td><a href="{{ path('app_view_tuto_site', { tuto_id: t_like.getId}) }}" class="tutoriel">Voir le tutoriel</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

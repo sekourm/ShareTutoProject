@@ -1,0 +1,50 @@
+<form class="form-horizontal" id="contact_form" method="POST">
+    <fieldset>
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    {{ form_label(form.username_sha) }}
+                    {{ form_widget(form.username_sha) }}
+                </div>
+            </div>
+        </div>
+        {{ form_errors(form.username_sha) }}
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    {{ form_label(form.password_sha['first']) }}
+                    {{ form_widget(form.password_sha['first']) }}
+                </div>
+            </div>
+        </div>
+        {{ form_errors(form.password_sha['first']) }}
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    {{ form_label(form.password_sha['second']) }}
+                    {{ form_widget(form.password_sha['second']) }}
+                </div>
+            </div>
+        </div>
+        {{ form_errors(form.password_sha['second']) }}
+        <div class="form-group">
+            <div class="col-md-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    {{ form_label(form.email_sha) }}
+                    {{ form_widget(form.email_sha) }}
+                </div>
+            </div>
+        </div>
+        {{ form_errors(form.email_sha) }}
+        {{ form_row(form._token) }}
+        <div class="form-group">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-md btn-danger pull-right">Go</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

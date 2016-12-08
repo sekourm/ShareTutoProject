@@ -1,0 +1,38 @@
+AppBundle\Entity\Share_users:
+    type: entity
+    table: t_share_users_sha
+    oneToMany:
+      UsersTutos:
+            targetEntity: Share_tutos
+            mappedBy: TutosUsers
+      UsersView:
+            targetEntity: Share_tutos_view
+            mappedBy: ViewUsers
+      UsersLike:
+            targetEntity: Share_tutos_like
+            mappedBy: LikeUsers
+    repositoryClass: AppBundle\Repository\Share_usersRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }
+    fields:
+        username_sha:
+            type: string
+        email_sha:
+            type: string
+        password_sha:
+            type: string
+        active_sha:
+            type: boolean
+        personal_key_sha:
+            type: string
+        grade_sha:
+            type: string
+        created_at_sha:
+            type: datetime
+        update_at_sha:
+            type: datetime

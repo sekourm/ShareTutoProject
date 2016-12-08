@@ -1,0 +1,30 @@
+AppBundle\Entity\Share_tutos:
+    properties:
+        title_stu:
+            - NotNull:
+                message: Entrer un titre
+                groups:  ['Edit', 'New']
+            - Length:
+                            min: 2
+                            max: 40
+                            minMessage: "Le titre doit contenir {{ limit }} charactéres minimum"
+                            maxMessage: "Le titre doit contenir {{ limit }} charactéres maximum"
+                            groups:  ['Edit', 'New']
+        description_stu:
+            - NotNull:
+                message: Entrer une description
+                groups:  ['Edit', 'New']
+            - Length:
+                            min: 8
+                            max: 100
+                            minMessage: "La description doit contenir {{ limit }} charactéres minimum"
+                            maxMessage: "La description doit contenir {{ limit }} charactéres maximum"
+                            groups:  ['Edit', 'New']
+        TutosCategories:
+            - NotNull:
+                message: Entrer une Catégories
+                groups:  ['Edit', 'New']
+        content_stu:
+            - NotNull:
+                message: Entrer une Catégories
+                groups:  ['Edit', 'New']

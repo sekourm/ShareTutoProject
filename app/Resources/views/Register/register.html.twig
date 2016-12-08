@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container-fluid login_register">
+    <div class="row-fluid">
+        <div class="col-md-offset-4 col-md-4" id="box">
+            <h2>Inscrivez-Vous</h2>
+            <hr>
+            {{ include('Form/form_register.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

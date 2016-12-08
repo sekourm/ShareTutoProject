@@ -1,0 +1,46 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            {% if app.user %}
+                <a class="navbar-brand" href="{{ path('app_home_site')}}"> <img src="{{ asset('img/logo.png') }}" class="logo"
+                                                           alt="tutorial_symfony"> TutoShared</a>
+            {% else %}
+                <a class="navbar-brand" href="{{ path('login')}}"> <img src="{{ asset('img/logo.png') }}" class="logo"
+                                                            alt="tutorial_symfony"> TutoShared</a>
+            {% endif %}
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                {% if app.user %}
+                    <li><a href="{{ path('app_home_site')}}">Accueil</a></li>
+                    <li><a href="{{ path('app_create_tutorial_site')}}">Créer un tutorial</a></li>
+                    <li><a href="{{ path('app_show_like_site')}}">Mes favoris</a></li>
+                    <li><a href="{{ path('logout')}}">Deconnexion</a></li>
+                {% else %}
+                    <li><a href="{{ path('login')}}">Vous connectez</a></li>
+                    <li><a href="{{ path('app_register_site')}}">Vous inscrire</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    {% if app.user %}
+    <div class="search-bar">
+        <form>
+            <input id="search_input" type="text" placeholder="Rechercher un tutoriel" required />
+            <div class="search-icon"></div>
+        </form>
+    </div>
+
+    <div class="result_search text-center">
+        <ul class="list_search">
+        </ul>
+    </div>
+    {% endif %}
+</nav>

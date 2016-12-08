@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <div class="col-md-12 col-xs-12 col-sm-12 sidebar">
+                    <ul class="nav nav-sidebar text-center">
+                        {% for all_c in categories %}
+                            <li><a href="{{ path('app_view_tutorial_by_categ_site', { categ_id: all_c.getId}) }}"><img src="{{ all_c.getLogoSca }}" alt="{{ all_c.getNameSca }}"
+                                                 class="logo_categories">{{ all_c.getNameSca }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-12">
+                    <div class="col-sm-12 col-xs-12 col-md-12">
+                        <h1 class="page-header"><img src="{{ asset('img/arrow.png') }}" alt="arrow"
+                                                     class="arrow_header"/>Créer
+                            un tutoriel</h1>
+                    </div>
+                    <div class="col-sm-12 col-xs-12 col-md-8">
+                        {{ include('Form/form_tutorial.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{{ asset('js/plugin/jQuery.plugin.js') }}"></script>
+    <script type="text/javascript"> $("textarea").my_wysiwyg(); </script>
+
+{% endblock %}

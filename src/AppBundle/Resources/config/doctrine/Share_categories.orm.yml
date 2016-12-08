@@ -1,0 +1,26 @@
+AppBundle\Entity\Share_categories:
+    type: entity
+    table: t_share_categories_sca
+    oneToMany:
+        CategoriesTutos:
+          targetEntity: Share_tutos
+          mappedBy: TutosCategories
+    repositoryClass: AppBundle\Repository\Share_categoriesRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }
+    fields:
+      name_sca:
+          type: string
+      logo_sca:
+          type: text
+      active_sca:
+          type: boolean
+      created_at_sca:
+          type: datetime
+      updated_at_sca:
+          type: datetime
