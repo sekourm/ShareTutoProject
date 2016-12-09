@@ -18,7 +18,8 @@ AppBundle\Entity\Share_users:
             id: true
             generator:
                 strategy: AUTO
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [ insertCreatedAtAuto, insertUpdateAtAuto, insertRoleAtAuto ]
     fields:
         username_sha:
             type: string
@@ -28,6 +29,8 @@ AppBundle\Entity\Share_users:
             type: string
         active_sha:
             type: boolean
+            option:
+                defaults: 0
         personal_key_sha:
             type: string
         grade_sha:

@@ -3,21 +3,45 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SearchController extends Controller
 {
-    public function SearchTutorialAction($title_tutorial, Request $request)
+    public function SearchTutorialAction($title_tutorial)
     {
+        /**
+         * get the search result
+         */
         $em = $this->getDoctrine()->getManager();
+        $allTutoSearch = $em->getRepository('AppBundle:Share_tutos')->getSearchTutorial($title_tutorial);
 
-        $qb = $em->createQueryBuilder();
-        $result = $qb->select('n')->from('AppBundle\Entity\Share_tutos', 'n')
-            ->where( $qb->expr()->like('n.title_stu', $qb->expr()->literal('%' . $title_tutorial . '%')), $qb->expr()->in('n.active_stu', '1'))
-            ->getQuery()
-            ->getArrayResult();
+        /**
+         * return json to script auto completion
+         */
+        return $allTutoSearch;
+    }
 
-       return new JsonResponse($result);
+    public function searchTutorialViewAction($title_tutorial)
+    {
+        /**
+         * get all request
+         */
+        $em = $this->getDoctrine()->getManager();
+        $allCategories = $em->getRepository('AppBundle:Share_categories')->getAllCategories();
+        $allTutoSearch = $em->getRepository('AppBundle:Share_tutos')->getSearchTutorial($title_tutorial, false);
+
+        /**
+         * pagination for all tutorial of the search
+         */
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $allTutoSearch,
+            $this->get('request')->query->get('page', 1),
+            2
+        );
+
+        /**
+         * rendering view @allCategories @pagination @title_tutorial
+         */
+        return $this->render('Tutorial/tutorial_by_search.html.twig', array('categories' => $allCategories, 'title_tutorial' => $title_tutorial, 'pagination' => $pagination));
     }
 }

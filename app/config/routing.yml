@@ -28,13 +28,25 @@ app_create_tutorial_site:
   path: /tuto/create
   defaults: { _controller: AppBundle:Tutorial:CreateTutorial }
 
+app_view_my_tutorial_site:
+  path: /tuto/view/user/
+  defaults: { _controller: AppBundle:Tutorial:allUserTutorial }
+
 app_view_tutorial_by_categ_site:
   path: /tuto/view/categ/{categ_id}
   defaults: { _controller: AppBundle:Tutorial:ViewTutorialByCategorie }
 
+app_view_tutorial_by_categ_user_site:
+  path: /tuto/view/categ/user/{categ_id}
+  defaults: { _controller: AppBundle:Tutorial:ViewTutorialByCategorieUser }
+
 app_view_tuto_site:
   path: /tuto/view/{tuto_id}
   defaults: { _controller: AppBundle:Tutorial:ViewTutorial }
+
+app_delete_tutorial_site:
+  path: /tuto/delete/{tuto_id}
+  defaults: { _controller: AppBundle:Tutorial:deleteTutorial }
 
 app_create_like_site:
   path: /like/create/{tuto_id}
@@ -51,6 +63,10 @@ app_show_like_site:
 app_search_tutorial_site:
   path: /search/tutorial/{title_tutorial}
   defaults: { _controller: AppBundle:Search:SearchTutorial }
+
+app_search_tutorial_view_site:
+  path: /search/tutorial/view/{title_tutorial}
+  defaults: { _controller: AppBundle:Search:searchTutorialView }
 
 pageNotFound:
     pattern:  /{path}

@@ -194,6 +194,117 @@ class TutorialController extends Controller
          * rendering view @allCategories @categorie_active @pagination
          */
         return $this->render('Tutorial/tutorial_by_categ_view.html.twig', array('categories' => $allCategories, 'categorie_active' => $oneCategories, 'pagination' => $pagination));
+    }
 
+    public function allUserTutorialAction()
+    {
+        /**
+         * declare array for speciation
+         */
+        $allTutorialUserExist = [];
+
+        /**
+         * all request to database
+         */
+        $em = $this->getDoctrine()->getManager();
+        $allCategories = $em->getRepository('AppBundle:Share_categories')->getAllCategories();
+        $allTutorialUser = $this->getUser()->getUsersTutos()->getValues();
+
+        /**
+         * get all tuto not deleted tuto
+         */
+
+        for ($i = 0; $i < count($allTutorialUser); $i++) {
+            if ($allTutorialUser[$i]->getActiveStu() == '1') {
+                array_push($allTutorialUserExist, $allTutorialUser[$i]);
+            }
+        }
+
+        /**
+         * pagination for all tutorial of the categories
+         */
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $allTutorialUserExist,
+            $this->get('request')->query->get('page', 1),
+            2
+        );
+
+        /**
+         * rendering view @allCategories @pagination
+         */
+        return $this->render('Tutorial/tutorial_by_user.html.twig', array('categories' => $allCategories, 'tuto' => $allTutorialUser, 'pagination' => $pagination));
+    }
+
+    public function deleteTutorialAction($tuto_id, Request $request)
+    {
+        $allTutorial = $this->getUser()->getUsersTutos();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $tutorial = $em->getRepository('AppBundle:Share_tutos')->find($tuto_id);
+
+        if (!$tutorial)
+        {
+            $request->getSession()->getFlashBag()->add('error', 'Aucun article existe sur ce paramétre');
+        }
+        else
+        {
+            for($i=0;$i < count($allTutorial);$i++) {
+                if ($allTutorial[$i]->getId() == $tuto_id) {
+                    $tutorial->setActiveStu('0');
+                    $em->flush();
+                    $request->getSession()->getFlashBag()->add('success', 'Tutorial supprimé avec succées.');
+                }
+                else
+                {
+                    $request->getSession()->getFlashBag()->add('error', 'Vous ne possedez pas les droits');
+                }
+            }
+
+        }
+        return $this->redirect('/tuto/view/user/');
+    }
+
+    public function ViewTutorialByCategorieUserAction($categ_id)
+    {
+        $user_id = $this->getUser()->getId();
+
+        /**
+         * declare array for speciation
+         */
+        $tutorialCategorieByUser = [];
+
+        /**
+         * all request to the database
+         */
+        $em = $this->getDoctrine()->getManager();
+        $allCategories = $em->getRepository('AppBundle:Share_categories')->getAllCategories();
+        $oneCategories = $em->getRepository('AppBundle:Share_categories')->find($categ_id);
+        $allTutorial = $oneCategories->getCategoriesTutos();
+
+        /**
+         * get all tuto to the User for this categorie
+         */
+        for ($i = 0; $i < count($allTutorial); $i++) {
+            if ($allTutorial[$i]->getTutosUsers()->getId() == $user_id) {
+                array_push($tutorialCategorieByUser, $allTutorial[$i]);
+            }
+        }
+
+        /**
+         * pagination for all tutorial of the categories
+         */
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $tutorialCategorieByUser,
+            $this->get('request')->query->get('page', 1),
+            2
+        );
+
+        /**
+         * rendering view @allCategories @categorie_active @pagination
+         */
+        return $this->render('Tutorial/tutorial_by_categ_user_view.html.twig', array('categories' => $allCategories, 'categorie_active' => $oneCategories, 'pagination' => $pagination));
     }
 }

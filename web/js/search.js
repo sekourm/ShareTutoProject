@@ -14,6 +14,7 @@ $(document).ready(function () {
                 type: 'get',
                 url: 'http://localhost:8000/search/tutorial/' + $search_input.val(),
                 success: function (data) {
+                    $list_search.html("");
                     $list_search.append("<li>Resultat trouver: " + data.length + "</li>");
 
                     for (var i = 0; i < data.length; i++) {
@@ -22,8 +23,8 @@ $(document).ready(function () {
                         }
                     }
 
-                    if (data.length > 1) {
-                        $list_search.append("<li><a href='#'>Voir plus de résultat</a></li>");
+                    if (data.length > 6) {
+                        $list_search.append("<li><a href='/search/tutorial/view/"+ $search_input.val() +"'>Voir plus de résultat</a></li>");
                     }
 
                 }, error: function (error) {

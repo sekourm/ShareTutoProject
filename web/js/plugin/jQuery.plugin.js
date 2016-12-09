@@ -72,8 +72,8 @@
         /*
          * desactive sa pour voir le code
          */
-         $('.wysiwyg-bouton_1').hide();
-         $('.wysiwyg-bouton_2').hide();
+         //$('.wysiwyg-bouton_1').hide();
+         //$('.wysiwyg-bouton_2').hide();
 
         /*******************************\
          ***********BOUTTONS**************

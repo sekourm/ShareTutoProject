@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-12">
+                <div class="col-sm-12 col-xs-12 col-md-12">
+                    <h1 class="page-header"><img src="{{ asset('img/arrow.png') }}" alt="arrow"
+                                                 class="arrow_header"/>Tout mes Tutoriels <span
+                                class="nbr_tuto">{{ pagination.getTotalItemCount }}</span></h1>
+                </div>
+                <div class="col-md-12 col-xs-12 col-sm-12 sidebar">
+                    <ul class="nav nav-sidebar text-center">
+                        {% for all_c in categories %}
+                            <li><a href="{{ path('app_view_tutorial_by_categ_user_site', { categ_id: all_c.getId}) }}"><img
+                                            src="{{ all_c.getLogoSca }}"
+                                            alt="{{ all_c.getNameSca }}"
+                                            class="logo_categories">Mes tutoriels [{{ all_c.getNameSca }}]
+                                </a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                    <div class="row placeholders margin_card">
+                        {{ include('Alert/alert.html.twig') }}
+                        {% if  tuto %}
+                            {% for tuto_n in pagination %}
+                                <div class="cards">
+                                    <div class="image">
+                                        <img src="{{ tuto_n.getTutosCategories.getLogoSca }}"
+                                             alt="{{ tuto_n.getTutosCategories.getNameSca }}"/>
+                                        <a href="{{ path('app_view_tuto_site',{tuto_id: tuto_n.getId}) }}"
+                                           class="tutoriel">Voir le tutoriel</a>
+                                        <a href="/tuto/delete/{{ tuto_n.getId() }}" class="tutoriel">
+                                            <div class="btn_trash">
+                                                <img src="{{ asset('img/trash.png') }}" alt="trash"/>
+                                            </div>
+                                        </a>
+                                        <a href="#" class="tutoriel">
+                                            <div class="btn_update">
+                                                <img src="{{ asset('img/update.png') }}" alt="update"/>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="button_cards_dispear">
+                                        <h3>{{ tuto_n.getTitleStu }}</h3>
+                                        <p>{{ tuto_n.getDescriptionStu }}</p>
+                                        <div class="name"><img src="{{ asset('img/users.png') }}" alt="users"
+                                                               class="users_tuto"/> {{ tuto_n.getTutosUsers.GetUsernameSha }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="nothing_tuto">
+                                Vous n'avez encore aucun tutoriel, <a href="{{ path('app_create_tutorial_site') }}">
+                                    Créer un tutoriel maintenant ? </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12 col-md-12 text-center pagination">
+                <hr/>
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

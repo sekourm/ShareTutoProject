@@ -35,7 +35,7 @@ class Share_users implements UserInterface, AdvancedUserInterface, \Serializable
     /**
      * @var boolean
      */
-    private $active_sha;
+    private $active_sha = 0;
 
     /**
      * @var string
@@ -361,6 +361,22 @@ class Share_users implements UserInterface, AdvancedUserInterface, \Serializable
     public function removeUsersLike(\AppBundle\Entity\Share_tutos_like $usersLike)
     {
         $this->UsersLike->removeElement($usersLike);
+    }
+
+    public function insertCreatedAtAuto()
+    {
+        $this->setCreatedAtSha(new \DateTime());
+    }
+
+    public function insertUpdateAtAuto()
+    {
+        $this->setUpdateAtSha(new \DateTime());
+    }
+
+
+    public function insertRoleAtAuto()
+    {
+        $this->setGradeSha('ROLE_USER');
     }
 
     /**

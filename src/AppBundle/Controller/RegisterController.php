@@ -46,19 +46,10 @@ class RegisterController extends Controller
             $private_key = md5(microtime() . rand());
 
             /**
-             * get current date
-             */
-            $time = new \DateTime();
-
-            /**
              * insert the user in database with password encode
              */
             $users->setPersonalKeySha($private_key);
-            $users->setActiveSha('1');
-            $users->SetGradeSha('ROLE_USER');
             $users->setPasswordSha($password);
-            $users->SetCreatedAtSha($time);
-            $users->SetUpdateAtSha($time);
             $em = $this->getDoctrine()->getManager();
             $em->persist($users);
             $em->flush();
