@@ -12,7 +12,7 @@ $(document).ready(function () {
             $result_search.show();
             $.ajax({
                 type: 'get',
-                url: 'http://localhost:8000/search/tutorial/' + $search_input.val(),
+                url: 'http://127.0.0.1:8000/search/tutorial/' + $search_input.val(),
                 success: function (data) {
                     $list_search.html("");
                     $list_search.append("<li>Resultat trouver: " + data.length + "</li>");
